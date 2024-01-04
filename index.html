@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playing Bingo</title>
+    <script src="./scripts/index.js" defer type="module"></script>
+</head>
+<body>
+    <div class="app">
+
+        <div class="wellcome"><!--modal to wellcome the player-->
+            <h1>Seja muito bem Vindo ao sorteador de bingo!</h1>
+            <p>Aqui você pode controlar todo o jogo, ver números que já foram sorteados, ver historico de partidas e tudo ao som da voz de DAVI.</p>
+            <button id="close-modal">&times;</button>
+        </div>
+
+        <div class="gameModal">
+            <h1>Sorteie os números</h1>
+            <h2>Números sorteados :</h2>
+            <div class="sortedNumbers">
+                <span>23</span>
+            </div>
+            <button id="sort">sortear</button><!--numbers that will be sorted, but i have to make an verify to know if already have this numbers on array-->
+        </div>
+        
+        <div class="boxModel">
+            <h1>Configurações do jogo</h1>
+            <label for="inputQTY">Quantidade de numeros possíveis</label>
+            <div class="displayRangeInput">
+                <input type="range" id="inputQTY">
+                <span style="display: flex; align-items: center; justify-content: space-between; width: fit-content; gap: 1rem;">
+                    <p>Quantidade: </p>
+                    <span id="display-range">00</span>
+                </span>
+                <button id="save-changes">Salvar mudanças</button>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>
