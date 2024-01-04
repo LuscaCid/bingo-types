@@ -2,6 +2,7 @@ const input : HTMLInputElement | null = document.querySelector('#inputQTY')
 const displayRange : HTMLSpanElement | null = document.querySelector('#display-range')
 const saveChangesButton : HTMLButtonElement | null = document.querySelector("#save-changes")
 const sortButton : HTMLButtonElement | null = document.querySelector('#sort-buttton')
+
 let actualValue : number;
 let actualNumbersSorted : number []= []
 
@@ -55,3 +56,7 @@ saveChangesButton?.addEventListener('click', saveChangesFunction)
 
 
 
+//ele vai clicar para sortear um novo numero, para isso inicialmente deve-se verificar se nos numeros
+/**
+ * que ja foram sorteados, n foi sorteado novamente, se for, vai lançar outro sorteio
+ */

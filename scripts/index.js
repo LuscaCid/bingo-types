@@ -48,3 +48,7 @@ const saveChangesFunction = (e) => {
     localStorage.setItem('@Bingo-range', JSON.stringify(actualValue));
 };
 saveChangesButton === null || saveChangesButton === void 0 ? void 0 : saveChangesButton.addEventListener('click', saveChangesFunction);
+//ele vai clicar para sortear um novo numero, para isso inicialmente deve-se verificar se nos numeros
+/**
+ * que ja foram sorteados, n foi sorteado novamente, se for, vai lançar outro sorteio
+ */ 
