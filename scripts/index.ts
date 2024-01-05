@@ -3,26 +3,34 @@ const displayRange : HTMLSpanElement | null = document.querySelector('#display-r
 const saveChangesButton : HTMLButtonElement | null = document.querySelector("#save-changes")
 const sortButton : HTMLButtonElement | null = document.querySelector('#sort')
 
-let actualValue : number= 2
-let actualNumbersSorted : number []= []
+let actualValue : number= 5
+let actualNumbersSorted : number[]= [];
 //preciso criar um array que receba os numeros sorteados para verificar se ja estao no original
 //uma matriz
 
-const VerifyArr = (randomNumber : number) : boolean | undefined =>  {
-    const thisValueAlreadyExistsInArray = actualNumbersSorted.filter((each) => each === randomNumber)
-    console.log(actualNumbersSorted, 'array orig')
-    console.log('boolean results', thisValueAlreadyExistsInArray)
-    if(thisValueAlreadyExistsInArray.length === 0)return false
-    else if(thisValueAlreadyExistsInArray.length > 0)return true
+const VerifyArr = (randomNumber : number) : boolean  =>  {
+    const arrLength = actualNumbersSorted.length
+    console.log(arrLength)
+    if(arrLength < actualValue){
+        for(let i =0; i < arrLength; i++){
+            if(actualNumbersSorted[i] == randomNumber){
+                randomNumber = Math.round(Math.random() * 5)
+                VerifyArr(randomNumber)//caso esteja no vetor, retorna a funcao para ser executada dnv
+            }
+        }
+    } else return false 
+    return true
 }
 
 type LastNumMessage = "Ultimo numero possivel"
 const lastNumMessage : LastNumMessage = "Ultimo numero possivel"
 
-const sortANewNumber = () : LastNumMessage | void =>{
+const sortANewNumber = () : LastNumMessage | void | number =>{
     const randomNumber : number = Math.round(Math.random() * 2)
-    VerifyArr(randomNumber) ? alert('fim de jogo') : actualNumbersSorted.push(randomNumber)
+    const isPossible : boolean = VerifyArr(randomNumber) 
+    if(isPossible)return actualNumbersSorted.push(randomNumber)
     console.log(actualNumbersSorted)
+    if(!isPossible)return alert('nao eh mais possivel sortar')
 }
 
 sortButton?.addEventListener('click', sortANewNumber)
@@ -42,6 +50,7 @@ window.document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem("@test", JSON.stringify(arrTest))
     console.log(localStorage.getItem("@test"))
     const sss  = localStorage.getItem("@test")
+
     let actualNumbersSorted = sss?.split(',').map(element => {
         if(element.includes('['))return Number(element.replace('[', ' '))
         else if(element.includes(']'))return Number(element.replace(']', ' '))

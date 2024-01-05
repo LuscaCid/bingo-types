@@ -3,24 +3,34 @@ const input = document.querySelector('#inputQTY');
 const displayRange = document.querySelector('#display-range');
 const saveChangesButton = document.querySelector("#save-changes");
 const sortButton = document.querySelector('#sort');
-let actualValue = 2;
+let actualValue = 5;
 let actualNumbersSorted = [];
 //preciso criar um array que receba os numeros sorteados para verificar se ja estao no original
 //uma matriz
 const VerifyArr = (randomNumber) => {
-    const thisValueAlreadyExistsInArray = actualNumbersSorted.filter((each) => each === randomNumber);
-    console.log(actualNumbersSorted, 'array orig');
-    console.log('boolean results', thisValueAlreadyExistsInArray);
-    if (thisValueAlreadyExistsInArray.length === 0)
+    const arrLength = actualNumbersSorted.length;
+    console.log(arrLength);
+    if (arrLength < actualValue) {
+        for (let i = 0; i < arrLength; i++) {
+            if (actualNumbersSorted[i] == randomNumber) {
+                randomNumber = Math.round(Math.random() * 5);
+                VerifyArr(randomNumber); //caso esteja no vetor, retorna a funcao para ser executada dnv
+            }
+        }
+    }
+    else
         return false;
-    else if (thisValueAlreadyExistsInArray.length > 0)
-        return true;
+    return true;
 };
 const lastNumMessage = "Ultimo numero possivel";
 const sortANewNumber = () => {
     const randomNumber = Math.round(Math.random() * 2);
-    VerifyArr(randomNumber) ? alert('fim de jogo') : actualNumbersSorted.push(randomNumber);
+    const isPossible = VerifyArr(randomNumber);
+    if (isPossible)
+        return actualNumbersSorted.push(randomNumber);
     console.log(actualNumbersSorted);
+    if (!isPossible)
+        return alert('nao eh mais possivel sortar');
 };
 sortButton === null || sortButton === void 0 ? void 0 : sortButton.addEventListener('click', sortANewNumber);
 input === null || input === void 0 ? void 0 : input.addEventListener('input', () => {
