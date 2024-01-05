@@ -1,36 +1,28 @@
 const input : HTMLInputElement | null = document.querySelector('#inputQTY')
 const displayRange : HTMLSpanElement | null = document.querySelector('#display-range')
 const saveChangesButton : HTMLButtonElement | null = document.querySelector("#save-changes")
-const sortButton : HTMLButtonElement | null = document.querySelector('#sort-buttton')
+const sortButton : HTMLButtonElement | null = document.querySelector('#sort')
 
-let actualValue : number;
+let actualValue : number= 2
 let actualNumbersSorted : number []= []
+//preciso criar um array que receba os numeros sorteados para verificar se ja estao no original
+//uma matriz
 
-const VerifyArr = (randomNumber : number) : undefined | number =>  {
-    
+const VerifyArr = (randomNumber : number) : boolean | undefined =>  {
     const thisValueAlreadyExistsInArray = actualNumbersSorted.filter((each) => each === randomNumber)
-    if(thisValueAlreadyExistsInArray)return undefined
-    return actualNumbersSorted.push(randomNumber)
+    console.log(actualNumbersSorted, 'array orig')
+    console.log('boolean results', thisValueAlreadyExistsInArray)
+    if(thisValueAlreadyExistsInArray.length === 0)return false
+    else if(thisValueAlreadyExistsInArray.length > 0)return true
 }
 
 type LastNumMessage = "Ultimo numero possivel"
 const lastNumMessage : LastNumMessage = "Ultimo numero possivel"
 
 const sortANewNumber = () : LastNumMessage | void =>{
-    let randomNumber : number = Math.round(Math.random() * actualValue)
-    let try1 = VerifyArr(randomNumber)
-    let count : number = 0
-    if(!try1){
-        while(!try1){
-            count++
-            randomNumber = Math.round(Math.random() * actualValue)
-            try1 = VerifyArr(randomNumber)
-            if(try1)break;
-            else if(count > actualValue){
-                return lastNumMessage
-            } 
-        }
-    }
+    const randomNumber : number = Math.round(Math.random() * 2)
+    VerifyArr(randomNumber) ? alert('fim de jogo') : actualNumbersSorted.push(randomNumber)
+    console.log(actualNumbersSorted)
 }
 
 sortButton?.addEventListener('click', sortANewNumber)
