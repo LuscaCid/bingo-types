@@ -41,6 +41,19 @@ input === null || input === void 0 ? void 0 : input.addEventListener('input', ()
 window.document.addEventListener('DOMContentLoaded', () => {
     console.log('incializou');
     actualValue = Number(localStorage.getItem("@Bingo-range"));
+    let arrTest = [1, 3, 4, 5, 5, 4, 4, 3, 3, 4,];
+    localStorage.setItem("@test", JSON.stringify(arrTest));
+    console.log(localStorage.getItem("@test"));
+    const sss = localStorage.getItem("@test");
+    let actualNumbersSorted = sss === null || sss === void 0 ? void 0 : sss.split(',').map(element => {
+        if (element.includes('['))
+            return Number(element.replace('[', ' '));
+        else if (element.includes(']'))
+            return Number(element.replace(']', ' '));
+        else
+            return Number(element);
+    });
+    console.log(actualNumbersSorted);
 });
 //info that will be saved when modal clses
 const saveChangesFunction = (e) => {
