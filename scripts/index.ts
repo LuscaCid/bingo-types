@@ -42,6 +42,15 @@ input?.addEventListener('input', () => {
         displayRange.innerHTML = stringActual.padStart(2 , '0')
     }     
 })
+/*
+function parseToArrayAgain<T extends string | null >(arrString : T){
+    arrString?.split(',').map(element => {
+        if(element.includes('['))return Number(element.replace('[', ' '))
+        else if(element.includes(']'))return Number(element.replace(']', ' '))
+        else return Number(element)  
+    }
+}*/
+
 //informations will be received from localstorage 
 window.document.addEventListener('DOMContentLoaded', () => {
     console.log('incializou')
@@ -51,13 +60,11 @@ window.document.addEventListener('DOMContentLoaded', () => {
     console.log(localStorage.getItem("@test"))
     const sss  = localStorage.getItem("@test")
 
-    let actualNumbersSorted = sss?.split(',').map(element => {
-        if(element.includes('['))return Number(element.replace('[', ' '))
-        else if(element.includes(']'))return Number(element.replace(']', ' '))
-        else return Number(element)
-    })
-    console.log(actualNumbersSorted)
+    //let actualNumbersSorted = parseToArrayAgain(sss)
+    //console.log(actualNumbersSorted)
 })
+
+
 //info that will be saved when modal clses
 const saveChangesFunction = (e : Event) => {
     e.preventDefault()
